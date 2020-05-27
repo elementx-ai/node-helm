@@ -34,12 +34,21 @@ https://docs.helm.sh/helm/#helm-list
 ```
 
 ### Get a release
-https://docs.helm.sh/helm/#helm-get
+https://helm.sh/docs/helm/helm_get/
 ```
     let options = {
-        releaseName = 'service';
+        releaseName: 'service',
+        subCommand: 'all'
     }
     let history = await helm.getAsync(options);  
+```
+Available Sub-Commands:
+```
+    all         download all information for a named release
+    hooks       download all hooks for a named release
+    manifest    download the manifest for a named release
+    notes       download the notes for a named release
+    values      download the values file for a named release
 ```
 
 ### Install a service

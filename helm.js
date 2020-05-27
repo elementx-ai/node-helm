@@ -87,6 +87,10 @@ module.exports = class Helm {
 
     get(options, done){
         let command = ['get'];
+        if (options.subCommand == null) {
+            throw new Error("Missing parameter 'subcommand'");
+        }
+        command.push(options.subCommand);
         if(options.releaseName == null){
             throw new Error("Missing parameter 'releaseName'");
         }          
