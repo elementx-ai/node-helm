@@ -85,11 +85,10 @@ https://docs.helm.sh/helm/#helm-upgrade
     });
 ```
 
-### Delete a service
-https://docs.helm.sh/helm/#helm-delete
+### Uninstall a release
+https://helm.sh/docs/helm/helm_uninstall/
 ```
     var options = {
-        shouldPurge : true,
         releaseName: 'service'
     }
     return await helm.deleteAsync(options);

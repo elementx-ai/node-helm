@@ -76,13 +76,10 @@ module.exports = class Helm {
         this.executeCommandByArguments(options, command, done);
     }
 
-    delete(options, done) {
-        let command = ['delete'];
+    uninstall(options, done) {
+        let command = ['uninstall'];
         if (options.releaseName == null) {
             throw new Error("Missing parameter 'releaseName'");
-        }
-        if (options.shouldPurge) {
-            command.push('--purge');
         }
         command.push(options.releaseName);
 
