@@ -27,9 +27,13 @@ var helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
 ## API
 
 ### List releases
-https://docs.helm.sh/helm/#helm-list
+https://helm.sh/docs/helm/helm_list/
 ```
-    let options = {}; //No options available currently
+    let options = {
+        namespace: 'default',
+        max: 10,
+        offset: 20
+    }; // all parameters are optional
     let releases = await helm.listAsync(options);  
 ```
 

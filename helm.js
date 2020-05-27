@@ -89,7 +89,18 @@ module.exports = class Helm {
     
     list(options, done){
         let command = ['list'];
-
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
+        if(options.max){
+            command.push('--max');
+            command.push(options.max);
+        }
+        if(options.offset){
+            command.push('--offset');
+            command.push(options.offset);
+        }
         this.executeCommandByArguments(options, command, done);               
     }
 
