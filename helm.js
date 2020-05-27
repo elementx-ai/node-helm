@@ -54,7 +54,11 @@ module.exports = class Helm {
     }
 
     upgrade(options, done) {
-        let command = ['upgrade', options.releaseName];
+        let command = ['upgrade'];
+        if (options.releaseName == null) {
+            throw new Error("Missing required parameters 'releaseName'");
+        }
+        command.push(options.releaseName);
         if (options.chartName == null) {
             throw new Error ("Missing parameter 'chartName'");
         }
@@ -62,6 +66,9 @@ module.exports = class Helm {
         if (options.version) {
             command.push('--version');
             command.push(options.version);
+        }
+        if (options.install) {
+            command.push('--install');
         }
         if (options.values) {
             command.push('--set');
@@ -71,6 +78,9 @@ module.exports = class Helm {
         }
         if (options.reuseValues) {
             command.push('--reuse-values');
+        }
+        if (options.resetValues) {
+            command.push('--reset-values');
         }
 
         this.executeCommandByArguments(options, command, done);

@@ -71,12 +71,14 @@ let options = {
 return installation = await helm.installAsync(options);
 ```
 
-
-### Upgrade a service
-https://docs.helm.sh/helm/#helm-upgrade
+### Upgrade a release
+https://helm.sh/docs/helm/helm_upgrade/
 ```
     return await helm.upgradeAsync({
-        reuseValues : shouldReuseValues, //boolean value
+        reuseValues: shouldReuseValues, // boolean value (when upgrading, reuse the last release's values) - optional
+        resetValues: shouldResetValues, // boolean value (when upgrading, reset the values to the ones built into the chart) - optional
+        version: "latest", // optional
+        install: shouldInstall, // boolean value (if a release by this name doesn't already exist, run an install) -- optional
         chartName: "./ChartFolder",
         releaseName: SERVICENAME,
         values: {
