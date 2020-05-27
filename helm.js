@@ -8,13 +8,21 @@ module.exports = class Helm {
         this.executer = new Executer(config.helmCommand, config.output);
     }
 
-    command(commandString, done){
-        this.executer.callByCommand(commandString, callbackHandler(done, false));
+    command(commandString, done, isJsonSupported){
+        let isJsonSupported = false;
+        if (options.output && options.output == 'json') {
+            isJsonSupported = true;
+        }
+        this.executer.callByCommand(commandString, callbackHandler(done, isJsonSupported), isJsonSupported);
     }
     
     executeCommandByArguments(options, command, done) {
+        let isJsonSupported = false;
+        if (options.output && options.output == 'json') {
+            isJsonSupported = true;
+        }
         commandBuilder.addParentOptions(options, command);
-        this.executer.callByArguments(command, callbackHandler(done, false));
+        this.executer.callByArguments(command, callbackHandler(done, isJsonSupported), isJsonSupported);
     }
 
     install(options, done) {
