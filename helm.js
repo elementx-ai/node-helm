@@ -26,7 +26,6 @@ module.exports = class Helm {
         if (options.releaseName == null) {
             throw new Error("Missing required parameters 'releaseName'");
         }
-        command.push('--name');
         command.push(options.releaseName);
         if (options.namespace) {
             command.push('--namespace');
