@@ -3,12 +3,11 @@
 The package is a wrapper that integrates with the helm.sh process.
 
 ## Installation
-
 ```
 npm install node-helm
 ```
-## Get Started
 
+## Get Started
 Setup your helm.sh file location - for linux or windows
 ```
 let helmBinary = '/usr/local/bin/helm';
@@ -30,42 +29,42 @@ let helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
 ### List releases
 https://helm.sh/docs/helm/helm_list/
 ```
-    let options = {
-        namespace: 'default',
-        max: 10,
-        offset: 20
-    }; // all parameters are optional
-    let releases = await helm.listAsync(options);
+let options = {
+    namespace: 'default',
+    max: 10,
+    offset: 20
+}; // all parameters are optional
+let releases = await helm.listAsync(options);
 ```
 
 ### Get a release
 https://helm.sh/docs/helm/helm_get/
 ```
-    let options = {
-        releaseName: 'service',
-        subCommand: 'all'
-    }
-    let history = await helm.getAsync(options);
+let options = {
+    releaseName: 'myReleaseName',
+    subCommand: 'all'
+}
+let history = await helm.getAsync(options);
 ```
 Available Sub-Commands:
 ```
-    all         download all information for a named release
-    hooks       download all hooks for a named release
-    manifest    download the manifest for a named release
-    notes       download the notes for a named release
-    values      download the values file for a named release
+all         download all information for a named release
+hooks       download all hooks for a named release
+manifest    download the manifest for a named release
+notes       download the notes for a named release
+values      download the values file for a named release
 ```
 
 ### Install a release
 https://helm.sh/docs/helm/helm_install/
 ```
 let options = {
-    chartName: "CHARTNAME",
-    releaseName: "SERVICENAME",
+    chartName: "sourceChartName",
+    releaseName: "myReleaseName",
     namespace: "dev", // optional
     version: "latest", // optional
     values: {
-        "authKey":"20FD87EA-A679-4817-AFA4-E5CC17712456"
+        "organisation":"Sugar Labs"
     } // custom values - optional
 };
 return installation = await helm.installAsync(options);
@@ -74,80 +73,61 @@ return installation = await helm.installAsync(options);
 ### Upgrade a release
 https://helm.sh/docs/helm/helm_upgrade/
 ```
-    return await helm.upgradeAsync({
-        reuseValues: shouldReuseValues, // boolean value (when upgrading, reuse the last release's values) - optional
-        resetValues: shouldResetValues, // boolean value (when upgrading, reset the values to the ones built into the chart) - optional
-        version: "latest", // optional
-        install: shouldInstall, // boolean value (if a release by this name doesn't already exist, run an install) -- optional
-        chartName: "./ChartFolder",
-        releaseName: SERVICENAME,
-        values: {
-            "authKey":"20FD87EA-A679-4817-AFA4-E5CC17712456"
-        }
-    });
+return await helm.upgradeAsync({
+    reuseValues: shouldReuseValues, // boolean value (when upgrading, reuse the last release's values) - optional
+    resetValues: shouldResetValues, // boolean value (when upgrading, reset the values to the ones built into the chart) - optional
+    version: "latest", // optional
+    install: shouldInstall, // boolean value (if a release by this name doesn't already exist, run an install) -- optional
+    chartName: "./chartFolder",
+    releaseName: myReleaseName,
+    values: {
+        "organisation":"Sugar Labs"
+    }
+});
 ```
 
 ### Uninstall a release
 https://helm.sh/docs/helm/helm_uninstall/
 ```
-    var options = {
-        releaseName: 'service'
-    }
-    return await helm.deleteAsync(options);
+var options = {
+    releaseName: 'myReleaseName'
+}
+return await helm.deleteAsync(options);
 ```
 
 ### Get release history
-https://docs.helm.sh/helm/#helm-history
+https://helm.sh/docs/helm/helm_history/
 ```
-    let options = {
-        releaseName = 'service';
-    }
-    let history = await helm.historyAsync(options);
+let options = {
+    releaseName = 'myReleaseName';
+}
+let history = await helm.historyAsync(options);
 ```
 
 ### Test a release
-https://docs.helm.sh/helm/#helm-test
+https://helm.sh/docs/helm/helm_test/
 ```
-    let options = {
-        releaseName = 'service'
-    }
-    let test = await helm.testAsync(options);
+let options = {
+    releaseName = 'myReleaseName'
+}
+let test = await helm.testAsync(options);
 ```
-
 
 ### Rollback a release to a previous revision
-https://docs.helm.sh/helm/#helm-rollback
+https://helm.sh/docs/helm/helm_rollback/
 ```
-    let options = {
-        releaseName = 'service',
-        revision: 0
-    };
-    let rollback = await helm.rollbackAsync(options);
+let options = {
+    releaseName = 'myReleaseName',
+    revision: 0 // number
+};
+let rollback = await helm.rollbackAsync(options);
 ```
-
 
 ### Get a release status
-https://docs.helm.sh/helm/#helm-status
+https://helm.sh/docs/helm/helm_status/
 ```
-    let options = {
-        releaseName = 'service';
-    }
-    let status = await helm.statusAsync(options);
-```
-
-## Release Notes
-```
-    19/02/19 -
-        1. Add basic parent options support to all commands
-        2. Use esversion 6 typing
-
-    11/02/19 -
-        1. Add 3 methods: test,status,rollback
-        2. Update README
-        3. Update LICENSE
-
-    10/02/19 -
-        1.Added native object json response for some commands
-        2.Added get release method support
-        3.All methods are now using options variable
+let options = {
+    releaseName = 'myReleaseName';
+}
+let status = await helm.statusAsync(options);
 ```
