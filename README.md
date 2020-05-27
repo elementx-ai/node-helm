@@ -1,10 +1,10 @@
-# node-helm
-`node-helm` was created for javascript developers who work with [helm.sh package manager for Kubernetes](https://helm.sh/).
+# nodejs-helm
+`nodejs-helm` was created for javascript developers who work with [helm.sh package manager for Kubernetes](https://helm.sh/).
 The package is a wrapper that integrates with the helm.sh process.
 
 ## Installation
 ```
-npm install node-helm
+npm install nodejs-helm
 ```
 
 ## Get Started
@@ -20,7 +20,7 @@ if (process.platform === "win32") {
 require Helm class
 ```
 let Promise = require("bluebird");
-const Helm = require("node-helm").Helm;
+const Helm = require("nodejs-helm").Helm;
 let helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
 ```
 

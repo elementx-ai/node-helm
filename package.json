@@ -1,5 +1,5 @@
 {
-  "name": "node-helm",
+  "name": "nodejs-helm",
   "version": "0.1.0",
   "description": "Node helm created for javascript developers that works with helm.sh package manager for Kubernetes.",
   "main": "index.js",
@@ -14,6 +14,8 @@
   "license": "MIT",
   "keywords": [
     "helm",
+    "helm3",
+    "nodejs-helm",
     "node-helm",
     "yaml",
     "kubectl"
