@@ -3,31 +3,33 @@ const helperMethods = require('./helperMethods');
 const Executer = require('./Executer');
 
 module.exports = class Helm {
-    constructor(config) {        
-        this.config = config;        
+    constructor(config) {
+        this.config = config;
         this.executer = new Executer(config.helmCommand, config.output);
     }
 
-    command(commandString, done, isJsonSupported){
+    command(commandString, done, isJsonSupported) {
         let isJsonSupported = false;
         if (options.output && options.output == 'json') {
             isJsonSupported = true;
         }
+
         this.executer.callByCommand(commandString, callbackHandler(done, isJsonSupported), isJsonSupported);
     }
-    
+
     executeCommandByArguments(options, command, done) {
         let isJsonSupported = false;
         if (options.output && options.output == 'json') {
             isJsonSupported = true;
         }
         commandBuilder.addParentOptions(options, command);
+
         this.executer.callByArguments(command, callbackHandler(done, isJsonSupported), isJsonSupported);
     }
 
     install(options, done) {
         let command = ['install'];
-        if(options.chartName == null){
+        if (options.chartName == null) {
             throw new Error("Missing required parameter 'chartName'");
         }
         command.push(options.chartName);
@@ -39,127 +41,128 @@ module.exports = class Helm {
             command.push('--namespace');
             command.push(options.namespace);
         }
-        if(options.version){
-            command.push('--version');
-            command.push(options.version);
-        }
-        if (options.values) {
-            command.push('--set');       
-            command.push(helperMethods.flattenValuesToString(options.values));
-        }
-        
-        this.executeCommandByArguments(options, command, done);        
-    }
-
-    upgrade(options, done) {        
-        let command = ['upgrade', options.releaseName];
-        if (options.chartName == null) {
-            throw new Error ("Missing parameter 'chartName'");
-        }
-        command.push(options.chartName);
-        if(options.version){
+        if (options.version) {
             command.push('--version');
             command.push(options.version);
         }
         if (options.values) {
             command.push('--set');
-            var valuesString  = helperMethods.flattenValuesToString(options.values);
+            command.push(helperMethods.flattenValuesToString(options.values));
+        }
+
+        this.executeCommandByArguments(options, command, done);
+    }
+
+    upgrade(options, done) {
+        let command = ['upgrade', options.releaseName];
+        if (options.chartName == null) {
+            throw new Error ("Missing parameter 'chartName'");
+        }
+        command.push(options.chartName);
+        if (options.version) {
+            command.push('--version');
+            command.push(options.version);
+        }
+        if (options.values) {
+            command.push('--set');
+            var valuesString = helperMethods.flattenValuesToString(options.values);
             valuesString = valuesString.slice(0, -1);
             command.push(valuesString);
         }
         if (options.reuseValues) {
             command.push('--reuse-values');
         }
-        
-        this.executeCommandByArguments(options, command, done);        
+
+        this.executeCommandByArguments(options, command, done);
     }
 
     delete(options, done) {
-        let command = ['delete'];        
-        if(options.releaseName == null){
+        let command = ['delete'];
+        if (options.releaseName == null) {
             throw new Error("Missing parameter 'releaseName'");
-        }  
-        if(options.shouldPurge){
+        }
+        if (options.shouldPurge) {
             command.push('--purge');
-        } 
-        command.push(options.releaseName); 
+        }
+        command.push(options.releaseName);
 
-        this.executeCommandByArguments(options, command, done);                
+        this.executeCommandByArguments(options, command, done);
     }
-    
-    list(options, done){
+
+    list(options, done) {
         let command = ['list'];
         if (options.namespace) {
             command.push('--namespace');
             command.push(options.namespace);
         }
-        if(options.max){
+        if (options.max) {
             command.push('--max');
             command.push(options.max);
         }
-        if(options.offset){
+        if (options.offset) {
             command.push('--offset');
             command.push(options.offset);
         }
-        this.executeCommandByArguments(options, command, done);               
+
+        this.executeCommandByArguments(options, command, done);
     }
 
-    get(options, done){
+    get(options, done) {
         let command = ['get'];
         if (options.subCommand == null) {
             throw new Error("Missing parameter 'subcommand'");
         }
         command.push(options.subCommand);
-        if(options.releaseName == null){
+        if (options.releaseName == null) {
             throw new Error("Missing parameter 'releaseName'");
-        }          
+        }
         command.push(options.releaseName);
 
-        this.executeCommandByArguments(options, command, done);                  
+        this.executeCommandByArguments(options, command, done);
     }
 
-    history(options, done){
+    history(options, done) {
         let command = ['history'];
-        if(options.releaseName == null){
+        if (options.releaseName == null) {
             throw new Error("Missing parameter 'releaseName'");
-        }          
-        command.push(options.releaseName);     
-        
-        this.executeCommandByArguments(options, command, done);               
-    }
-
-    test(options, done){
-        let command = ['test'];
-        if(options.releaseName == null){
-            throw new Error("Missing parameter 'releaseName'");
-        }          
-        command.push(options.releaseName);   
-        
-        this.executeCommandByArguments(options, command, done);               
-    }
-
-    status(options, done){
-        let command = ['status'];
-        if(options.releaseName == null){
-            throw new Error("Missing parameter 'releaseName'");
-        }          
-        command.push(options.releaseName);      
-        
-        this.executeCommandByArguments(options, command, done);               
-    }
-
-    rollback(options, done){
-        let command = ['rollback'];
-        if(options.releaseName == null){
-            throw new Error("Missing parameter 'releaseName'");
-        }          
-        if(options.revision == null){
-            throw new Error("Missing parameter 'revision'");
-        }          
+        }
         command.push(options.releaseName);
-        command.push(options.revision);        
 
-        this.executeCommandByArguments(options, command, done);          
+        this.executeCommandByArguments(options, command, done);
+    }
+
+    test(options, done) {
+        let command = ['test'];
+        if (options.releaseName == null) {
+            throw new Error("Missing parameter 'releaseName'");
+        }
+        command.push(options.releaseName);
+
+        this.executeCommandByArguments(options, command, done);
+    }
+
+    status(options, done) {
+        let command = ['status'];
+        if (options.releaseName == null) {
+            throw new Error("Missing parameter 'releaseName'");
+        }
+        command.push(options.releaseName);
+
+        this.executeCommandByArguments(options, command, done);
+    }
+
+    rollback(options, done) {
+        let command = ['rollback'];
+        if (options.releaseName == null) {
+            throw new Error("Missing parameter 'releaseName'");
+        }
+        command.push(options.releaseName);
+        if (options.revision == null) {
+            throw new Error("Missing parameter 'revision'");
+        }
+        command.push(options.revision);
+
+        this.executeCommandByArguments(options, command, done);
     }
 };
 
@@ -168,9 +171,8 @@ function callbackHandler(done, isJsonSupportedCommand) {
         if (err) {
             console.error(err);
             done(err, data);
-        }
-        else {            
-            done(null, isJsonSupportedCommand ? data : helperMethods.parseResponseToJson(data));            
+        } else {
+            done(null, isJsonSupportedCommand ? data : helperMethods.parseResponseToJson(data));
         }
     };
 }

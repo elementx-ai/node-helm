@@ -1,4 +1,4 @@
-# node-helm 
+# node-helm
 `node-helm` was created for javascript developers who work with [helm.sh package manager for Kubernetes](https://helm.sh/).
 The package is a wrapper that integrates with the helm.sh process.
 
@@ -35,7 +35,7 @@ https://helm.sh/docs/helm/helm_list/
         max: 10,
         offset: 20
     }; // all parameters are optional
-    let releases = await helm.listAsync(options);  
+    let releases = await helm.listAsync(options);
 ```
 
 ### Get a release
@@ -45,7 +45,7 @@ https://helm.sh/docs/helm/helm_get/
         releaseName: 'service',
         subCommand: 'all'
     }
-    let history = await helm.getAsync(options);  
+    let history = await helm.getAsync(options);
 ```
 Available Sub-Commands:
 ```
@@ -61,14 +61,14 @@ https://docs.helm.sh/helm/#helm-install
 ```
 let options = {
     chartName: "CHARTNAME",
-    releaseName: "SERVICENAME",        
-    namespace: "dev",        
+    releaseName: "SERVICENAME",
+    namespace: "dev",
     //custom values
     values: {
         "authKey":"20FD87EA-A679-4817-AFA4-E5CC17712456"
     }
 };
-return installation = await helm.installAsync(options);  
+return installation = await helm.installAsync(options);
 ```
 
 
@@ -82,7 +82,7 @@ https://docs.helm.sh/helm/#helm-upgrade
         values: {
             "authKey":"20FD87EA-A679-4817-AFA4-E5CC17712456"
         }
-    });  
+    });
 ```
 
 ### Delete a service
@@ -97,57 +97,56 @@ https://docs.helm.sh/helm/#helm-delete
 
 ### Get release history
 https://docs.helm.sh/helm/#helm-history
-```    
+```
     let options = {
         releaseName = 'service';
     }
-    let history = await helm.historyAsync(options);  
+    let history = await helm.historyAsync(options);
 ```
 
 ### Test a release
 https://docs.helm.sh/helm/#helm-test
-```    
+```
     let options = {
         releaseName = 'service'
     }
-    let test = await helm.testAsync(options);  
+    let test = await helm.testAsync(options);
 ```
 
 
 ### Rollback a release to a previous revision
 https://docs.helm.sh/helm/#helm-rollback
-```    
+```
     let options = {
         releaseName = 'service',
         revision: 0
     };
-    let rollback = await helm.rollbackAsync(options);  
+    let rollback = await helm.rollbackAsync(options);
 ```
 
 
 ### Get a release status
 https://docs.helm.sh/helm/#helm-status
-```    
+```
     let options = {
         releaseName = 'service';
     }
-    let status = await helm.statusAsync(options);  
+    let status = await helm.statusAsync(options);
 ```
 
 ## Release Notes
 ```
-    19/02/19 - 
+    19/02/19 -
         1. Add basic parent options support to all commands
         2. Use esversion 6 typing
 
-    11/02/19 - 
+    11/02/19 -
         1. Add 3 methods: test,status,rollback
         2. Update README
         3. Update LICENSE
 
-    10/02/19 - 
+    10/02/19 -
         1.Added native object json response for some commands
         2.Added get release method support
         3.All methods are now using options variable
-
 ```

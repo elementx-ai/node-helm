@@ -3,27 +3,27 @@ module.exports = {
     DefaultHelmCommand: 'helm',
     OutputCommand: '--output',
     HelmResponseDelimiter: '---',
-    DefaultCommandDelimiter : '--',
-    ParentOptionsDictionary : {
-        debug : {            
-            command: "--debug"            
-        }, 
-        home : {            
+    DefaultCommandDelimiter: '--',
+    ParentOptionsDictionary: {
+        debug: {
+            command: "--debug"
+        },
+        home: {
             command: "--home",
             type: "string"
         },
-        host : {
+        host: {
             command: "--host",
             type: "string"
-        }, 
-        kobeContext:{
+        },
+        kobeContext: {
             command: "--kube-context",
             type: "string"
-        }, 
-        kubeconfig :{
+        },
+        kubeconfig: {
             command: "--kubeconfig",
             type: "string"
-        }, 
+        },
         tillerConnectionTimeout: {
             command: "--tiller-connection-timeout",
             type: "int"
@@ -32,5 +32,5 @@ module.exports = {
             command: "--tiller-namespace",
             type: "string"
         }
-    }       
+    }
 }
