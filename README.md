@@ -73,7 +73,7 @@ return installation = await helm.installAsync(options);
 ### Upgrade a release
 https://helm.sh/docs/helm/helm_upgrade/
 ```
-return await helm.upgradeAsync({
+let options = {
     reuseValues: shouldReuseValues, // boolean value (when upgrading, reuse the last release's values) - optional
     resetValues: shouldResetValues, // boolean value (when upgrading, reset the values to the ones built into the chart) - optional
     version: "latest", // optional
@@ -83,13 +83,14 @@ return await helm.upgradeAsync({
     values: {
         "organisation":"Sugar Labs"
     }
-});
+}
+return await helm.upgradeAsync(options);
 ```
 
 ### Uninstall a release
 https://helm.sh/docs/helm/helm_uninstall/
 ```
-var options = {
+let options = {
     releaseName: 'myReleaseName'
 }
 return await helm.deleteAsync(options);
@@ -99,7 +100,7 @@ return await helm.deleteAsync(options);
 https://helm.sh/docs/helm/helm_history/
 ```
 let options = {
-    releaseName = 'myReleaseName';
+    releaseName: 'myReleaseName';
 }
 let history = await helm.historyAsync(options);
 ```
@@ -108,7 +109,7 @@ let history = await helm.historyAsync(options);
 https://helm.sh/docs/helm/helm_test/
 ```
 let options = {
-    releaseName = 'myReleaseName'
+    releaseName: 'myReleaseName'
 }
 let test = await helm.testAsync(options);
 ```
@@ -117,7 +118,7 @@ let test = await helm.testAsync(options);
 https://helm.sh/docs/helm/helm_rollback/
 ```
 let options = {
-    releaseName = 'myReleaseName',
+    releaseName: 'myReleaseName',
     revision: 0 // number
 };
 let rollback = await helm.rollbackAsync(options);
@@ -127,7 +128,7 @@ let rollback = await helm.rollbackAsync(options);
 https://helm.sh/docs/helm/helm_status/
 ```
 let options = {
-    releaseName = 'myReleaseName';
+    releaseName: 'myReleaseName';
 }
 let status = await helm.statusAsync(options);
 ```
