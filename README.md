@@ -20,8 +20,9 @@ if (process.platform === "win32") {
 
 require Helm class
 ```
+let Promise = require("bluebird");
 const Helm = require("node-helm").Helm;
-var helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
+let helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
 ```
 
 ## API
