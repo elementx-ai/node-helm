@@ -29,14 +29,14 @@ module.exports = class Helm {
 
     install(options, done) {
         let command = ['install'];
-        if (options.chartName == null) {
-            throw new Error("Missing required parameter 'chartName'");
-        }
-        command.push(options.chartName);
         if (options.releaseName == null) {
             throw new Error("Missing required parameters 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.chartName == null) {
+            throw new Error("Missing required parameter 'chartName'");
+        }
+        command.push(options.chartName);
         if (options.namespace) {
             command.push('--namespace');
             command.push(options.namespace);

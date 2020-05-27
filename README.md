@@ -56,17 +56,17 @@ Available Sub-Commands:
     values      download the values file for a named release
 ```
 
-### Install a service
-https://docs.helm.sh/helm/#helm-install
+### Install a release
+https://helm.sh/docs/helm/helm_install/
 ```
 let options = {
     chartName: "CHARTNAME",
     releaseName: "SERVICENAME",
-    namespace: "dev",
-    //custom values
+    namespace: "dev", // optional
+    version: "latest", // optional
     values: {
         "authKey":"20FD87EA-A679-4817-AFA4-E5CC17712456"
-    }
+    } // custom values - optional
 };
 return installation = await helm.installAsync(options);
 ```
