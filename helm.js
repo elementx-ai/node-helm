@@ -164,7 +164,7 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
-        if (options.revision == null) {
+        if (options.revision == null || typeof options.revision != 'number') {
             throw new Error("Missing parameter 'revision'");
         }
         command.push(options.revision);
