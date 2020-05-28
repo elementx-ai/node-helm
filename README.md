@@ -93,7 +93,7 @@ https://helm.sh/docs/helm/helm_uninstall/
 let options = {
     releaseName: 'myReleaseName'
 }
-return await helm.deleteAsync(options);
+return await helm.uninstallAsync(options);
 ```
 
 ### Get release history
