@@ -178,7 +178,7 @@ function callbackHandler(done, isJsonSupportedCommand) {
         if (err) {
             done(err, data);
         } else {
-            done(null, isJsonSupportedCommand ? data : helperMethods.parseResponseToJson(data));
+            done(null, isJsonSupportedCommand ? helperMethods.parseJson(data) : helperMethods.parseResponseToJson(data));
         }
     };
 }

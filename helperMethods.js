@@ -47,8 +47,20 @@ function parseResponseToJson(rawData) {
     }
 }
 
+function parseJson(rawData) {
+    try {
+        var jsonData = JSON.parse(rawData);
+        return jsonData;
+    }
+    catch(e) {
+        console.log("could not parse helm response with error: " + e.message);
+        return rawData;
+    }
+}
+
 module.exports = {
     flattenValuesToString : flattenValuesToString,
     flattenObject : flattenObject,
-    parseResponseToJson : parseResponseToJson
+    parseResponseToJson : parseResponseToJson,
+    parseJson : parseJson
 };
