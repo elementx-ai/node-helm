@@ -1,5 +1,4 @@
-const YAML = require('yamljs');
-const constants = require('./constants');
+const YAML = require('yaml')
 
 const flattenValuesToString = function (values) {
     var valuesString = '';
@@ -32,10 +31,13 @@ const flattenObject = function (obj) {
 
 function parseResponseToJson(rawData) {
     try {
-        var splitedData = rawData.split(constants.HelmResponseDelimiter);
-        var jsonData = splitedData.map(function(responseYml) {
-            return YAML.parse(responseYml);
-        });
+        var parsedDocuments = YAML.parseAllDocuments(rawData);
+        var jsonData = [];
+        if (typeof parsedDocuments == "object") {
+            for (var i=0; i<parsedDocuments.length; i++) {
+                jsonData.push(parsedDocuments[i].toJSON());
+            }
+        }
         return jsonData;
     }
     catch(e) {
