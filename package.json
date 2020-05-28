@@ -1,6 +1,6 @@
 {
   "name": "nodejs-helm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Node helm created for javascript developers that works with helm.sh package manager for Kubernetes.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NikhilM98/node-helm.git"
+    "url": "git+https://github.com/NikhilM98/nodejs-helm.git"
   },
   "license": "MIT",
   "keywords": [
@@ -20,9 +20,9 @@
     "kubectl"
   ],
   "bugs": {
-    "url": "https://github.com/NikhilM98/node-helm/issues"
+    "url": "https://github.com/NikhilM98/nodejs-helm/issues"
   },
-  "homepage": "https://github.com/NikhilM98/node-helm#readme",
+  "homepage": "https://github.com/NikhilM98/nodejs-helm#readme",
   "dependencies": {
     "yaml": "^1.10.0"
   }
