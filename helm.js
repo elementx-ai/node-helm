@@ -8,8 +8,7 @@ module.exports = class Helm {
         this.executer = new Executer(config.helmCommand, config.output);
     }
 
-    command(commandString, done, isJsonSupported) {
-        let isJsonSupported = false;
+    command(commandString, done, isJsonSupported = false) {
         if (options.output && options.output == 'json') {
             isJsonSupported = true;
         }
@@ -19,7 +18,8 @@ module.exports = class Helm {
 
     executeCommandByArguments(options, command, done) {
         let isJsonSupported = false;
-        if (options.output && options.output == 'json') {
+        let jsonSupportedCommands = ['list', 'install', 'upgrade', 'history', 'status'];
+        if ((options.output && options.output == 'json') || (command.length > 0 && jsonSupportedCommands.includes(command[0]))) {
             isJsonSupported = true;
         }
         commandBuilder.addParentOptions(options, command);
@@ -176,7 +176,6 @@ module.exports = class Helm {
 function callbackHandler(done, isJsonSupportedCommand) {
     return function (err, data) {
         if (err) {
-            console.error(err);
             done(err, data);
         } else {
             done(null, isJsonSupportedCommand ? data : helperMethods.parseResponseToJson(data));
