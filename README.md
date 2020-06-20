@@ -30,7 +30,7 @@ let helm = Promise.promisifyAll(new Helm({helmCommand: helmBinary}));
 https://helm.sh/docs/helm/helm_list/
 ```
 let options = {
-    namespace: 'default',
+    allNamespaces: true, // optional
     max: 10,
     offset: 20
 }; // all parameters are optional
@@ -42,7 +42,8 @@ https://helm.sh/docs/helm/helm_get/
 ```
 let options = {
     releaseName: 'myReleaseName',
-    subCommand: 'all'
+    subCommand: 'all',
+    namespace: 'dev' // optional
 }
 let history = await helm.getAsync(options);
 ```
@@ -80,6 +81,7 @@ let options = {
     install: shouldInstall, // boolean value (if a release by this name doesn't already exist, run an install) -- optional
     chartName: "./chartFolder",
     releaseName: myReleaseName,
+    namespace: 'dev', // optional
     values: {
         "organisation":"Sugar Labs"
     }
@@ -91,7 +93,8 @@ return await helm.upgradeAsync(options);
 https://helm.sh/docs/helm/helm_uninstall/
 ```
 let options = {
-    releaseName: 'myReleaseName'
+    releaseName: 'myReleaseName',
+    namespace: 'dev' // optional
 }
 return await helm.uninstallAsync(options);
 ```
@@ -100,7 +103,8 @@ return await helm.uninstallAsync(options);
 https://helm.sh/docs/helm/helm_history/
 ```
 let options = {
-    releaseName: 'myReleaseName';
+    releaseName: 'myReleaseName',
+    namespace: 'dev' // optional
 }
 let history = await helm.historyAsync(options);
 ```
@@ -109,7 +113,8 @@ let history = await helm.historyAsync(options);
 https://helm.sh/docs/helm/helm_test/
 ```
 let options = {
-    releaseName: 'myReleaseName'
+    releaseName: 'myReleaseName',
+    namespace: 'dev' // optional
 }
 let test = await helm.testAsync(options);
 ```
@@ -119,7 +124,8 @@ https://helm.sh/docs/helm/helm_rollback/
 ```
 let options = {
     releaseName: 'myReleaseName',
-    revision: 0 // number
+    revision: 0 // number,
+    namespace: 'dev' // optional
 };
 let rollback = await helm.rollbackAsync(options);
 ```
@@ -128,7 +134,8 @@ let rollback = await helm.rollbackAsync(options);
 https://helm.sh/docs/helm/helm_status/
 ```
 let options = {
-    releaseName: 'myReleaseName';
+    releaseName: 'myReleaseName',
+    namespace: 'dev' // optional
 }
 let status = await helm.statusAsync(options);
 ```
