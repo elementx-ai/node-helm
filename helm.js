@@ -63,6 +63,10 @@ module.exports = class Helm {
             throw new Error ("Missing parameter 'chartName'");
         }
         command.push(options.chartName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
         if (options.version) {
             command.push('--version');
             command.push(options.version);
@@ -92,6 +96,10 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
 
         this.executeCommandByArguments(options, command, done);
     }
@@ -101,6 +109,8 @@ module.exports = class Helm {
         if (options.namespace) {
             command.push('--namespace');
             command.push(options.namespace);
+        } else if (options.allNamespaces) {
+            command.push('--all-namespaces');
         }
         if (options.max) {
             command.push('--max');
@@ -124,6 +134,10 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
 
         this.executeCommandByArguments(options, command, done);
     }
@@ -134,6 +148,10 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
 
         this.executeCommandByArguments(options, command, done);
     }
@@ -144,6 +162,10 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
 
         this.executeCommandByArguments(options, command, done);
     }
@@ -154,6 +176,10 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'releaseName'");
         }
         command.push(options.releaseName);
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
 
         this.executeCommandByArguments(options, command, done);
     }
@@ -168,7 +194,11 @@ module.exports = class Helm {
             throw new Error("Missing parameter 'revision'");
         }
         command.push(options.revision);
-
+        if (options.namespace) {
+            command.push('--namespace');
+            command.push(options.namespace);
+        }
+        
         this.executeCommandByArguments(options, command, done);
     }
 };

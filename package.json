@@ -1,6 +1,6 @@
 {
   "name": "nodejs-helm",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Node helm created for javascript developers that works with helm.sh package manager for Kubernetes.",
   "main": "index.js",
   "scripts": {
