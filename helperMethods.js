@@ -4,11 +4,28 @@ const flattenValuesToString = function (values) {
     var valuesString = '';
     for (var valueSet in values) {
         if (values.hasOwnProperty(valueSet)) {
-            valuesString += `${valueSet}=${values[valueSet]},`;
+            if (typeof values[valueSet] == "object") {
+                valuesString += flattenObjectToString(values[valueSet], `${valueSet}`)
+            } else {
+                valuesString += `${valueSet}=${values[valueSet]},`;
+            }
         }
     }
     return valuesString;
 };
+
+const flattenObjectToString = function (obj, index = null) {
+    var objString = '';
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == "object") {
+            objString += `${flattenObjectToString(obj[i], `${index ? index + '.' : ''}${i}`)}`
+        } else {
+            objString += `${index ? index + '.' : ''}${i}=${obj[i]},`;
+        }
+    }
+    return objString;
+}
 
 const flattenObject = function (obj) {
     var toReturn = {};
