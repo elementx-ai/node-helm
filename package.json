@@ -1,14 +1,14 @@
 {
-  "name": "nodejs-helm",
-  "version": "0.3.1",
+  "name": "node-helm",
+  "version": "0.4.0",
   "description": "Node helm created for javascript developers that works with helm.sh package manager for Kubernetes.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NikhilM98/nodejs-helm.git"
+    "url": "git+https://github.com/elementx-ai/nodejs-helm.git"
   },
   "license": "MIT",
   "keywords": [
@@ -20,10 +20,15 @@
     "kubectl"
   ],
   "bugs": {
-    "url": "https://github.com/NikhilM98/nodejs-helm/issues"
+    "url": "https://github.com/elementx-ai/nodejs-helm/issues"
   },
-  "homepage": "https://github.com/NikhilM98/nodejs-helm#readme",
+  "homepage": "https://github.com/elementx-ai/nodejs-helm#readme",
   "dependencies": {
     "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "@elementx-ai/eslint-config": "7.1.1",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0"
   }
 }

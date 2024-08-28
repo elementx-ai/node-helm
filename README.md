@@ -1,14 +1,16 @@
-# nodejs-helm
-`nodejs-helm` was created for javascript developers who work with [helm.sh package manager for Kubernetes](https://helm.sh/).
+# node-helm
+`node-helm` was created for javascript developers who work with [helm.sh package manager for Kubernetes](https://helm.sh/).
 The package is a wrapper that integrates with the helm.sh process.
 
 ## Installation
+
 ```
-npm install nodejs-helm
+npm i -P git+https://github.com/elementx-ai/node-helm.git
 ```
 
 ## Get Started
 Setup your helm.sh file location - for linux or windows
+
 ```
 let helmBinary = '/usr/local/bin/helm';
 

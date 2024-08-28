@@ -1,0 +1,24 @@
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+
+root: true
+
+env:
+  commonjs: true
+  node: true
+  jest: true
+
+extends:
+  - '@elementx-ai/eslint-config/configs/node'
+
+overrides:
+  - files:
+      - '*.js'
+    rules:
+      prefer-arrow/prefer-arrow-functions: off
+      func-style: off
+      no-undef: off
+      no-prototype-builtins: off
