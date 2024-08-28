@@ -19,6 +19,15 @@ describe("flattenValuesToString", () => {
       expected: "organisation.name=Sugar Labs",
     },
     {
+      description: "Annotation case",
+      input: {
+        nodeSelector: {
+          "kubernetes\\.io/role": "master",
+        },
+      },
+      expected: "nodeSelector.kubernetes\\.io/role=master",
+    },
+    {
       description: "Deep object case with multiple keys",
       input: {
         organisation: {
